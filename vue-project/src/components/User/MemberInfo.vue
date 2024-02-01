@@ -20,12 +20,14 @@ onMounted(() => {
 
 const route = useRoute()
 const id = computed(() => {
-  return route.path
+  // return route.path
+  return route.params.id
 })
 
 // const id = ref(route.params.id);
 // const id = currentRoute.params.id;
 
+console.log(route.params.id)
 console.log(id.value)
 
 </script>

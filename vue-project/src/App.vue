@@ -4,17 +4,22 @@
   </nav>
   <hr>
   <div>
-    <div v-for="userInfo in userInfos" :key="userInfo.id">
-      <router-link :to="'/YOBB/'+userInfo.name[1]"><div>
-        <h3 class="left-aligned">닉네임</h3>
-        <h4 class="left-aligned">{{ userInfo.nickname }}</h4>
-        <h3 class="left-aligned">대표 챔피언</h3>
-        <img :src="require(`@/assets/${userInfo.firstChampion_name}.jpg`)" width="224"> <img :src="require(`@/assets/${userInfo.secondChampion_name}.jpg`)" width="224">
-      </div></router-link>
+    <div v-for="userInfo in userInfos" :key="userInfo.id" class="lol-user-tab">
+      <router-link :to="'/YOBB/'+userInfo.name[1]">
+        <div>{{ userInfo.name[1] }}</div>
+<!--        <div>-->
+<!--          <h3 class="left-aligned">닉네임</h3>-->
+<!--          <h4 class="left-aligned">{{ userInfo.nickname }}</h4>-->
+<!--          <h3 class="left-aligned">대표 챔피언</h3>-->
+<!--          <img :src="require(`@/assets/${userInfo.firstChampion_name}.jpg`)" width="224">-->
+<!--          <img :src="require(`@/assets/${userInfo.secondChampion_name}.jpg`)" width="224">-->
+<!--        </div>-->
+      </router-link>
     </div>
   </div>
-<!--  <user-profile/>-->
-  <member-info/>
+<!--  <y-o-b-b-main-page/>-->
+  <user-profile/>
+<!--  <member-info/>-->
 <!--  <nav >-->
 <!--&lt;!&ndash;    <router-link to="/kakaologin">kakaologin</router-link> |&ndash;&gt;-->
 <!--    <router-link to="/YOBB/jihyun">지현</router-link> |-->
@@ -29,20 +34,27 @@
 <!--    <router-link to="/YOBB/ingyeom">인겸</router-link>-->
 <!--  </nav>-->
 <!--  <router-view/>-->
+  <div>
+    now id : {{route.params.id}}
+  </div>
+  <div>
+    now path : {{route.path}}
+  </div>
 </template>
 
 <script setup>
 
-// import MemberInfo from "@/components/User/MemberInfo.vue";
 import {useStore} from "vuex";
 import {computed} from "vue";
-// import UserProfile from "@/components/User/UserProfile.vue";
-import MemberInfo from "@/components/User/MemberInfo.vue";
+import UserProfile from "@/components/User/UserProfile.vue";
+import {useRoute} from 'vue-router'
+// import YOBBMainPage from "@/views/YOBBMainPage";
+// import MemberInfo from "@/components/User/MemberInfo.vue";
 
 const store = useStore();
+const route = useRoute();
 
-const userInfos = computed(() =>
-{
+const userInfos = computed(() => {
   return store.state.userInfo;
 });
 
@@ -76,5 +88,9 @@ nav a.router-link-exact-active-title {
 
 a {
   text-decoration: none;
+}
+.lol-user-tab {
+  display: inline-block;
+  width: 80px;
 }
 </style>
